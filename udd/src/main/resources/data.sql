@@ -1,0 +1,2 @@
+INSERT INTO udd_db.user(username, first_name, last_name, password, email, city, country, activated, role, points)
+    VALUES ('admin', 'Admin', 'Admin', '$2a$12$gpx1wDGsubrkEk6wEXa4D.eqo9G3z./.qhQz3tWc10vCaDnclR6tK', 'email@admin.com', 'NS', 'SRB', true, 'ADMIN', 0);
