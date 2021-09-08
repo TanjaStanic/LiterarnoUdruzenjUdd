@@ -1,2 +1,2 @@
-INSERT INTO udd_db.user(username, first_name, last_name, password, email, city, country, activated, role, points)
-    VALUES ('admin', 'Admin', 'Admin', '$2a$12$gpx1wDGsubrkEk6wEXa4D.eqo9G3z./.qhQz3tWc10vCaDnclR6tK', 'email@admin.com', 'NS', 'SRB', true, 'ADMIN', 0);
+INSERT INTO udd_db.user(username, first_name, last_name, password, email, city, country, activated, points)
+    VALUES ('admin', 'Admin', 'Admin', '$2a$10$BPGCvrv4ROnM70RrwZETwuU4irNlKFAQvXwYuiUrvevEIjDmhNSXi', 'email@admin.com', 'NS', 'SRB', true, 0);

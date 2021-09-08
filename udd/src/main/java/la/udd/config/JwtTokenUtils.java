@@ -21,7 +21,7 @@ import la.udd.repository.UserRepository;
 @Component
 public class JwtTokenUtils {
 
-	@Value("udd")
+	@Value("udd-app")
 	private String APP_NAME;
 
 	@Value("udd-secret")

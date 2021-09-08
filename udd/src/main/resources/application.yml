@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: uddApp
+  datasource:
+    url: jdbc:mysql://localhost:3306/udd_db?useSSL=false&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+    ddriver-class-name : com.mysql.jdbc.Driver
+    initialization-mode: always
+    data: classpath:data.sql
+  jpa:
+     hibernate:
+        ddl-auto: update
+     database-platform : org.hibernate.dialect.MySQL5Dialect
+     generate-ddl: true
+     properties:
+      hibernate:
+        show_sql: true
+   
+  data:
+    elasticsearch:
+      host: localhost
+      cluster-nodes: localhost:9300
+      properties:
+        http:
+          enabled: true
+
+elasticsearch:
+  baseUrl: http://localhost:9200/
+     
