@@ -7,15 +7,20 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.web.server.ServerHttpSecurity.RequestCacheSpec;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import la.udd.config.JwtTokenUtils;
@@ -25,6 +30,7 @@ import la.udd.repository.UserRepository;
 
 @RestController
 @RequestMapping(value = "/auth")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 	
 	
@@ -35,6 +41,7 @@ public class AuthController {
 
 	@Autowired 
 	UserRepository userRepository;
+	
 	
 	@PostMapping(path = "/login")
 	public ResponseEntity<?> login(@RequestBody @Valid JwtAuthenticationRequest request)
@@ -50,18 +57,35 @@ public class AuthController {
 	            ));
 
 	      SecurityContextHolder.getContext().setAuthentication(authenticate);
-
 	      Authentication loggedInUser = SecurityContextHolder.getContext().getAuthentication();
-
 	      User user = userRepository.findByUsername(loggedInUser.getName());
+	      System.out.println("Token: " + jwtTokenUtils.generateToken(user.getUsername()));
 	      return new ResponseEntity<>(
-	          jwtTokenUtils.generateToken(user.getUsername()), HttpStatus.ACCEPTED);
+	          jwtTokenUtils.generateToken(user.getUsername()), HttpStatus.OK);
 		
 		} catch (Exception exception){
+		      System.out.println("heree");
+
 	        return (ResponseEntity<?>) ResponseEntity.badRequest().body(exception.getMessage());
 	    }
 	
 	}
 	
+	
+	@RequestMapping(value = "/userprofile/{token}", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getProfile(@PathVariable("token") String token) {
+
+		System.out.println("IMA TOKEN: " + token);
+		String username = jwtTokenUtils.getUsername(token);
+		
+		System.out.println("USERNAME: " + username);
+	    User user = (User) this.userRepository.findByUsername(username);
+	    
+	    System.out.println("Korisnik: " + user.getEmail());
+	    		
+		return  new ResponseEntity<User>(user, HttpStatus.OK);
+	}
 	
 }

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @Table(name="user")
-public class User {
+public class User  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +55,7 @@ public class User {
 	private Role role;
 	
 	  // Genres readers are interested in
-	  @JsonIgnore
+	//  @JsonIgnore
 	  @ManyToMany(
 	      cascade = {CascadeType.ALL},
 	      fetch = FetchType.LAZY)
@@ -66,7 +66,7 @@ public class User {
 	  private Collection<Genre> genres;
 
 	  // Genres beta-readers are interested in
-	  @JsonIgnore
+	 // @JsonIgnore
 	  @ManyToMany(
 	      cascade = {CascadeType.ALL},
 	      fetch = FetchType.LAZY)
@@ -77,7 +77,7 @@ public class User {
 	  private Collection<Genre> betaGenres;
 
 	  // Books writers have contributed to/authored
-	    @JsonIgnore
+	   // @JsonIgnore
 	  @ManyToMany(
 	      cascade = {CascadeType.ALL},
 	      fetch = FetchType.LAZY)

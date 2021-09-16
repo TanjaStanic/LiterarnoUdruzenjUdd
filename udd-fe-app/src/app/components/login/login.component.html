@@ -14,9 +14,9 @@
   <div class="card">
     <div class="card-body login-card-body">
 
-      <form action="../../index3.html" method="post">
+      <form method="post" (submit) = "loginUser()">
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" class="form-control" placeholder="Username" [(ngModel)]="user.username" #username = "ngModel" name="username" id="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -24,13 +24,26 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" #password="ngModel" name="password" id="password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
         </div>
+        
+        <div class="row">
+        	<div class="col-xs-8">
+         		 <div class="checkbox icheck">
+          		 <label>
+              	 	<div class="alert alert-danger" *ngIf="!password.valid && password.touched"> Password is required! </div>    
+             		 <div class="alert error" [innerHTML]="htmlStr" ></div>
+                 </label>
+         	 </div>
+        	</div>
+        </div>
+        
+        
         <div class="row">
 
           <div class="col-4">

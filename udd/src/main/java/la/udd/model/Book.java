@@ -26,7 +26,7 @@ public class Book {
 	@Column 
 	private String title;
 	
-	@Column(unique = true)
+	@Column
 	private String isbn;
 	
 	@JsonIgnore
@@ -44,4 +44,8 @@ public class Book {
 	@Column private String pages;
 	  
 	@Column private String synopsis;
+	
+	@Column private Boolean isOpenAccesss;
+	
+	@Column private Boolean activated;
 }

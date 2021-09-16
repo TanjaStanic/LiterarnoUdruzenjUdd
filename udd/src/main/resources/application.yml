@@ -11,19 +11,13 @@ spring:
   jpa:
      hibernate:
         ddl-auto: update
-     database-platform : org.hibernate.dialect.MySQL5Dialect
-     generate-ddl: true
-     properties:
-      hibernate:
-        show_sql: true
+     database-platform : org.hibernate.dialect.MySQL5InnoDBDialect
+
    
   data:
     elasticsearch:
       host: localhost
-      cluster-nodes: localhost:9300
-      properties:
-        http:
-          enabled: true
+
 
 elasticsearch:
   baseUrl: http://localhost:9200/

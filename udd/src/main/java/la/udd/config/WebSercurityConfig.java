@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,6 +55,10 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
 	// If all else fails - turn off security by uncommenting these 3 lines
     @Override
     public void configure(WebSecurity web) throws Exception {
+      web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
+      web.ignoring().antMatchers(HttpMethod.POST, "/auth/userprofile/**");
+      web.ignoring().antMatchers(HttpMethod.POST, "/auth/logout");
+      web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
       web.ignoring().antMatchers("/**");
     }
 	
@@ -79,6 +84,12 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
           // Our public endpoints
           .antMatchers("/auth/**")
           .permitAll()
+          .antMatchers("/auth/login")
+          .permitAll()
+          .antMatchers("/auth/userprofile/**")
+          .permitAll()
+          .antMatchers("/auth/login/**")
+          .permitAll()
           .antMatchers("/registration/**")
           .permitAll()
 
@@ -93,10 +104,11 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
     public CorsFilter corsFilter() {
       UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
       CorsConfiguration config = new CorsConfiguration();
-      config.setAllowCredentials(true);
+      config.setAllowCredentials(false);
       config.addAllowedOrigin("*");
       config.addAllowedHeader("*");
-      config.addAllowedMethod("*");
+      config.addAllowedMethod("GET");
+      config.addAllowedMethod("POST");
       source.registerCorsConfiguration("/**", config);
       return new CorsFilter(source);
     }

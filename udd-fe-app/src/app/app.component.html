@@ -30,7 +30,9 @@
       <!-- Notifications Dropdown Menu -->
 
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/login" class="nav-link">Prijava</a>
+        <!-- >a href="/login" class="nav-link">Prijava</a-->
+        <span class ="visible" id="loginButton" [hidden]="logged"><a routerLink="login">Prijavi se</a></span>
+        <span class="hidden-xs" id="logoutButton" (click)="logOutUser()" [hidden]="notLogged" ><a routerLink="logout">Odjavi se</a></span>
       </li>
     </ul>
   </nav>
