@@ -5,18 +5,21 @@ spring:
     url: jdbc:mysql://localhost:3306/udd_db?useSSL=false&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     username: root
     password: root
-    ddriver-class-name : com.mysql.jdbc.Driver
     initialization-mode: always
-    data: classpath:data.sql
+   # data: classpath:data.sql
   jpa:
-     hibernate:
-        ddl-auto: update
-     database-platform : org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
 
    
   data:
     elasticsearch:
       host: localhost
+      cluster-name: Cluster
 
 
 elasticsearch:

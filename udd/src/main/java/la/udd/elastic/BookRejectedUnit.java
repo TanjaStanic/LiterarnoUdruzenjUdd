@@ -1,8 +1,5 @@
 package la.udd.elastic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -32,13 +29,13 @@ public class BookRejectedUnit {
     private String booktitle;
 	
 	@Field(type = FieldType.Text, analyzer="serbian", store = true)
-	private List<String> authors = new ArrayList<String>();
+	private String author;
 	
 	@Field(type = FieldType.Text, analyzer="serbian",store = true)
     private String keywords;
 	
 	@Field(type = FieldType.Text,analyzer="serbian", store = true)
-	private List<String> genres = new ArrayList<String>();
+	private String genre;
 	
 	@Field(type = FieldType.Boolean, store = true)
     private Boolean status;

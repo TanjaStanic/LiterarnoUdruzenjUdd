@@ -46,7 +46,13 @@ export class AppComponent implements OnInit {
   }
   logOutUser() {
     
-    this.userService.logOut().subscribe(podaci => window.location.href='http://localhost:4200');
+    this.userService.logOut().subscribe(
+    		podaci => {
+    			window.location.href='http://localhost:4200/homepage'
+    		},
+    		err => {
+    			window.location.href='http://localhost:4200/homepage'
+    		});
     this.auth.removeJwtToken();
     this.notLogged = true;
     this.logged = false;

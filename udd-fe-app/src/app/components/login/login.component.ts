@@ -61,21 +61,11 @@ export class LoginComponent implements OnInit {
 
               
               localStorage.setItem('user', JSON.stringify(currentUser));
-              //this.ssCertificate(podaci);
-              window.location.href = 'http://localhost:4200';
+              window.location.href = 'http://localhost:4200/homepage';
              
      });
         }
 	}
-	/*checkEmail(text : any): boolean {
-
-	    const patternMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    if (!patternMail.test(text)) {
-	      alert('Incorrect email.');
-	      return false;
-	    }
-	    return true;
-	  }*/
 
 	  handleAuthError(err: HttpErrorResponse) {
 		  console.log(err.status);

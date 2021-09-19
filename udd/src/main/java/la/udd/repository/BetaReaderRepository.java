@@ -6,5 +6,5 @@ import la.udd.elastic.BetaReader;
 
 public interface BetaReaderRepository extends ElasticsearchRepository<BetaReader, Long>{
 
-	BetaReader index(BetaReader b);
+	
 }

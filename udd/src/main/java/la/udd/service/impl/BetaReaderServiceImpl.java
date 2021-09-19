@@ -17,7 +17,7 @@ public class BetaReaderServiceImpl implements BetaReaderService{
 
 	@Override
 	public boolean add(BetaReader b) {
-		b = betaReaderRepository.index(b);
+		b = betaReaderRepository.save(b);
 		if (b!=null)
 			return true;
 		else

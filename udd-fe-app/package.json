@@ -24,6 +24,7 @@
     "admin-lte": "^3.0.5",
     "install": "^0.13.0",
     "lte": "0.0.1-beta.1",
+    "ng-multiselect-dropdown": "^0.3.4",
     "npm": "^7.23.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

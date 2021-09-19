@@ -2,8 +2,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
+        <div class="row">
+          <div class="col-12">
             <h1>Dodavanje knjige</h1>
           </div>
         </div>
@@ -14,7 +14,7 @@
       <div class="container-fluid">
         <div class="row">
           <!-- left column -->
-          <div class="col-md-6">
+          <div class="col-9">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
@@ -22,39 +22,35 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form>
+              <form method="post" (submit) = "addBook()">
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Naslov knjige</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Unesite naslov..">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Unesite naslov.." [(ngModel)]="book.title" #title = "ngModel">
                   </div>
                 
+                   <div class="form-group">
+                   	 <label for="exampleInputEmail1">Zanr</label>
+                   	 <input type="text" class="form-control" id="genre" placeholder="Unesite zanr.." name="genre" [(ngModel)]="book.genre" #genre = "ngModel">
+                  </div>
+                  
+                         
                       <div class="form-group">
-                        <label>Zanr knjige</label>
-                        <select multiple class="form-control">
-                          <option>option 1</option>
-                          <option>option 2</option>
-                          <option>option 3</option>
-                          <option>option 4</option>
-                          <option>option 5</option>
-                        </select>
+                        <label>Sinospis</label> 
+                        <textarea class="form-control" rows="3" placeholder="Unesite sinopsis ..." id="synopsis" name="synopsis" [(ngModel)]="book.synopsis" #synopsis = "ngModel">
+                        </textarea>
                       </div>
                       
-                      <div class="form-group">
-                        <label>Sinospis</label>
-                        <textarea class="form-control" rows="3" placeholder="Unesite sinopsis ..."></textarea>
-                      </div>
-                      
-                  <div class="form-group">
+                  <!-- div class="form-group">
                     <label for="exampleInputFile">PDF knjige</label>
                     <div class="input-group">
                       <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" accept=".pdf" id="file" name="file" [(ngModel)]="book.file" #file = "ngModel">
                         <label class="custom-file-label" for="exampleInputFile">Odaberi datoteku...</label>
                       </div>
                       
                     </div>
-                  </div>
+                  </div-->
   
                 </div>
                 <!-- /.card-body -->
@@ -65,7 +61,71 @@
               </form>
             </div>
          </div>
-        </div>
+        </div>      
      </div>
+   
 </section>
+
+ <section class="content-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <h1>Pregled knjiga</h1>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-12">
+ 				<div class="card">
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ISBN</th>
+                      <th>Status</th>
+                      <th>Naslov</th>
+                      <th>Zanr</th>
+                      <th>Sinopsis</th>
+                      <th>Dozvoljeno</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr	*ngFor="let b of myBooks">
+                      <td>{{b.isbn}}</td>
+                      <td>{{b.status}}</td>
+                      <td>{{b.title}}</td>
+                      <td>{{b.genre}}</td>
+                      <td>{{b.synopsis}}</td>
+                      <td >
+                     	 <input type="file" [disabled]="b.status != 'Odobrena' "  id="fileId" accept=".pdf" placeholder="Odaberi ..." (change)="onFileSelected($event)">
+                                          
+                      </td>
+                      <td>
+                      <button type="button" class="btn btn-block btn-default" [disabled]="b.status != 'Odobrena'" (click)="uploadFile(b.id)" >Potvrdi                    
+                
+                      </button>
+                                             
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+         </div>
+        </div>      
+     </div>
+   
+</section>
+
+
 </div>

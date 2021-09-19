@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Entity
 @Getter
@@ -24,28 +23,35 @@ public class Book {
 	private Long id;
 
 	@Column 
+	private String filename;
+	
+	@Column 
 	private String title;
 	
 	@Column
 	private String isbn;
 	
 	@JsonIgnore
-	@ManyToMany(mappedBy = "books")
-	private List<User> writers = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name="writer_id")
+	private User writer;
 	
-	@Column private String keyTerms;
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="editor_id")
+	private User editor;
 	
-	@Column private String publisher;
-	
-	@Column private String yearPublished;
-
-	@Column private String placePublished;
-	
-	@Column private String pages;
-	  
+	@Column private String status;
+		  
 	@Column private String synopsis;
 	
-	@Column private Boolean isOpenAccesss;
+	@Column private Boolean isOpenAccess;
 	
 	@Column private Boolean activated;
+	
+	@Column private String genre;
+	
+	
+	
+	
 }

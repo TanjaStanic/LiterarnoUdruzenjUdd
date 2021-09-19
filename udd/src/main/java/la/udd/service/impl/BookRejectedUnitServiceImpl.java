@@ -17,7 +17,7 @@ public class BookRejectedUnitServiceImpl implements BookRejectedUnitService {
 	
 	@Override
 	public boolean add(BookRejectedUnit b) {
-		b =  bookUnitRepository.index(b);
+		b =  bookUnitRepository.save(b);
 		if (b!=null) {
 			return true;
 		}

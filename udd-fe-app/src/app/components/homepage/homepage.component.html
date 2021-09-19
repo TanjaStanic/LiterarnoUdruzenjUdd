@@ -1,25 +1,110 @@
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+
+<section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Pretrazi....</h1>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
+        <h4 class="text-center display-4">Pretraga</h4>
+      </div>
     </section>
 
-<section class="content">
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <form >
+                        <div class="input-group input-group-lg">
+                            <input type="search" class="form-control form-control-lg" placeholder="Unesite pojam pretrage..">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-lg btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                   		<div class="col-10">
+                                <div class="form-group">
+                                    <label>Result Type:</label>
+                                    <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
+                                        <option>Text only</option>
+                                        <option>Images</option>
+                                        <option>Video</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="list-group">
+                        <div class="list-group-item">
+                            <div class="row">
+                                <div class="col-12">
+ 				<div class="card">
+
+		              <!-- /.card-header -->
+		              <div class="card-body table-responsive p-0">
+		                <table class="table table-hover text-nowrap">
+		                  <thead>
+		                    <tr>
+		                      <th>Naslov</th>
+		                      <th>Pisac</th>
+		                      <th>Zanr</th>
+		                      <th></th>
+		                      <th></th>
+		                    </tr>
+		                  </thead>
+		                  <tbody>
+		                    <tr	*ngFor="let b of books">
+		                      <td>{{b.title}}</td>
+		                      <td>{{b.writer}}</td>
+		                      <td>{{b.genre}}</td>
+		                      <td>
+		                     	 <button type="button" class="btn btn-success btn-block" [hidden]="b.openaccess" >
+		                     	 	Kupi</button>
+		                      </td>
+		                      <td>
+		                     	 <button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess" >
+		                     	 	Preuzmi
+		                      	</button>
+		                      </td>
+		                     
+		                    </tr>
+		                    
+		                  </tbody>
+		                </table>
+		              </div>
+	              <!-- /.card-body -->
+            		</div>
+        			 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- >div class="list-group-item">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">2021-04-20 10:14pm</div>
+                                        <h3>Lorem ipsum dolor sit amet</h3>
+                                        <p class="mb-0">consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div-->
+                        
+                    </div>
+                </div>
+            </div>
+           
+          
+            
+        </div>
+    </section>
+
+<!--section class="content">
       <div class="container-fluid">
         <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
+          <div class="col-12">
             <div class="card card-info">
-           
-              <!-- /.card-header -->
-              <!-- form start -->
               <form>
                 <div class="card-body">
                   <div class="form-group">
@@ -34,10 +119,10 @@
                 
   
                 </div>
-                <!-- /.card-body -->
+            
 
 
-                <div class="card-footer">
+                <!-- >div class="card-footer">
                   <button type="submit" class="btn btn-primary">Potvrdi</button>
                 </div>
                 <div class="card-footer">
@@ -56,5 +141,8 @@
          </div>
         </div>
      </div>
-</section>
+</section-->
+
+
+
 </div>

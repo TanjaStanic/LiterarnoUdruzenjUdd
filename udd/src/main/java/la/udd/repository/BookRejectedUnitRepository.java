@@ -6,6 +6,5 @@ import la.udd.elastic.BookRejectedUnit;
 
 public interface BookRejectedUnitRepository extends ElasticsearchRepository<BookRejectedUnit, Long>{
 
-	BookRejectedUnit index(BookRejectedUnit b);
 
 }

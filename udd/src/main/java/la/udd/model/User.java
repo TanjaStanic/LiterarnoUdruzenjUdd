@@ -1,6 +1,6 @@
 package la.udd.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -54,38 +54,13 @@ public class User  {
 	@Column
 	private Role role;
 	
-	  // Genres readers are interested in
-	//  @JsonIgnore
-	  @ManyToMany(
-	      cascade = {CascadeType.ALL},
-	      fetch = FetchType.LAZY)
-	  @JoinTable(
-	      name = "reader_genres",
-	      joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-	      inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
-	  private Collection<Genre> genres;
-
-	  // Genres beta-readers are interested in
-	 // @JsonIgnore
-	  @ManyToMany(
-	      cascade = {CascadeType.ALL},
-	      fetch = FetchType.LAZY)
-	  @JoinTable(
-	      name = "beta_genres",
-	      joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-	      inverseJoinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "id")})
-	  private Collection<Genre> betaGenres;
-
-	  // Books writers have contributed to/authored
-	   // @JsonIgnore
-	  @ManyToMany(
-	      cascade = {CascadeType.ALL},
-	      fetch = FetchType.LAZY)
-	  @JoinTable(
-	      name = "writers_books",
-	      joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-	      inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")})
-	  private Collection<Book> books;
+	@JsonIgnore
+    @OneToMany(mappedBy="writer")
+    protected List<Book> writerBooks;
+	
+	@JsonIgnore
+    @OneToMany(mappedBy="editor")
+    protected List<Book> editorBooks;
 	
 	public User() {
 		    activated = false;
