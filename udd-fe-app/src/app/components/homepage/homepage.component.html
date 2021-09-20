@@ -2,7 +2,7 @@
 
 <section class="content-header">
       <div class="container-fluid">
-        <h4 class="text-center display-4">Pretraga</h4>
+        <h6 class="text-center display-4">Pretraga</h6>
       </div>
     </section>
 
@@ -11,138 +11,169 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <form >
+                    <form (ngSubmit)="onSubimitBasic()">
                         <div class="input-group input-group-lg">
-                            <input type="search" class="form-control form-control-lg" placeholder="Unesite pojam pretrage..">
+                            <input type="search" class="form-control form-control-lg" placeholder="Unesite pojam pretrage.."
+                            name="queryBasic" [(ngModel)]="basicQuery">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-lg btn-default">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </div>
-                   		<div class="col-10">
-                                <div class="form-group">
-                                    <label>Result Type:</label>
-                                    <select class="select2" multiple="multiple" data-placeholder="Any" style="width: 100%;">
-                                        <option>Text only</option>
-                                        <option>Images</option>
-                                        <option>Video</option>
-                                    </select>
-                                </div>
-                            </div>
                     </form>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col-md-10 offset-md-1">
                     <div class="list-group">
-                        <div class="list-group-item">
-                            <div class="row">
-                                <div class="col-12">
- 				<div class="card">
-
-		              <!-- /.card-header -->
-		              <div class="card-body table-responsive p-0">
-		                <table class="table table-hover text-nowrap">
-		                  <thead>
-		                    <tr>
-		                      <th>Naslov</th>
-		                      <th>Pisac</th>
-		                      <th>Zanr</th>
-		                      <th></th>
-		                      <th></th>
-		                    </tr>
-		                  </thead>
-		                  <tbody>
-		                    <tr	*ngFor="let b of books">
-		                      <td>{{b.title}}</td>
-		                      <td>{{b.writer}}</td>
-		                      <td>{{b.genre}}</td>
-		                      <td>
-		                     	 <button type="button" class="btn btn-success btn-block" [hidden]="b.openaccess" >
-		                     	 	Kupi</button>
-		                      </td>
-		                      <td>
-		                     	 <button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess" >
-		                     	 	Preuzmi
-		                      	</button>
-		                      </td>
-		                     
-		                    </tr>
-		                    
-		                  </tbody>
-		                </table>
-		              </div>
-	              <!-- /.card-body -->
-            		</div>
-        			 </div>
-                            </div>
-                        </div>
-                        
-                        <!-- >div class="list-group-item">
+                      <div class="list-group-item">
                             <div class="row">
                                  <div class="col px-4">
                                     <div>
-                                        <div class="float-right">2021-04-20 10:14pm</div>
-                                        <h3>Lorem ipsum dolor sit amet</h3>
-                                        <p class="mb-0">consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                                        <ng-multiselect-dropdown name="basic" 
+				    					placeholder="Pretrazi po..." 
+				    					[settings]="dropdownSettings"
+				    					[data]="dropdownList" ngModel
+				                 		(onDeSelect)="onItemDeSelect($event)" 
+				                 		(onSelect)="onItemSelect($event)"
+				               			 value=selectedItems>
+			               			 </ng-multiselect-dropdown>
+			               			   </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                     <div class="list-group-item" *ngFor="let b of basicBooks">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">Pisac: {{b.bookUnit.writer}}</div>
+                                        <h3>{{b.bookUnit.title}}</h3>
+                                        <h5><i>{{b.bookUnit.genre}}</i></h5>
+                                        <p class="mb-0" [innerHTML]="b.highlights"></p>
+                                        <div class="float-right">
+                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.bookUnit.openaccess || !logged" >
+		                     	 		Kupi</button>
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.bookUnit.openaccess || !logged" >
+				                     	 	Preuzmi
+				                      	</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <!--div class="list-group-item" *ngFor="let b of books">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">Pisac: {{b.writer}}</div>
+                                        <h3>{{b.title}}</h3>
+                                        <h5><i>{{b.genre}}</i></h5>
+                                        <div class="float-right">
+                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.openaccess || !logged" >
+		                     	 		Kupi</button>
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess || !logged" >
+				                     	 	Preuzmi
+				                      	</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div-->
-                        
+
                     </div>
                 </div>
-            </div>
-           
-          
-            
+            </div>                
         </div>
     </section>
-
-<!--section class="content">
+    <section class="content-header">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card card-info">
-              <form>
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Naslov knjige</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Unesite naslov..">
-                  </div>
-                   <div class="form-group">
-                    <label for="exampleInputEmail1">Ime i prezime autora</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Unesite ime i prezime...">
-                  </div>
-               
-                
-  
+        <h6 class="text-center display-4">Napredna pretraga</h6>
+      </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="form-group">
+					   <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+					        <a id="addId" class="btn btn-block btn-outline-secondary" (click)="addField()">Dodaj polje</a>
+					   </div>
+					</div>
                 </div>
-            
-
-
-                <!-- >div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Potvrdi</button>
-                </div>
-                <div class="card-footer">
-                  <div class="col">
-                    <a id="hrefButton"  class="btn btn-success btn-block">Buy</a>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <a id="hrefButton"
-                      class="btn btn-success btn-block">Download</a>
-                </div>
-                
-              </form>
-         
             </div>
-         </div>
+            <div class="row mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="list-group">
+                  <form #f="ngForm" (ngSubmit)="onSubmitAdvanced()" ngNativeValidate>
+                    
+                   <div class="list-group-item" *ngFor='let f of fieldList; let i = index'>
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                    <div class="form-group">
+                                    <label>Izaberi operaciju: </label>
+                                    	<select class="select2" [(ngModel)]="f.operation" id="operation" name="operation">
+						                    <option value="AND" name="AND">AND</option>
+						                    <option value="OR" name="OR">OR</option>
+						                  </select>
+						               </div>
+						               <div class="form-group">
+						                 <ng-multiselect-dropdown #reporteedropDown class="custom-font-size" 
+						                 	name="advanced" placeholder="Pretrazi po..."
+						                    [settings]="dropdownSettings" 
+						                    [data]="dropdownList" [(ngModel)]="f.field" 
+						                    (onDeSelect)="onItemDeSelect($event)" 
+						                    (onSelect)="onItemSelect($event)" 
+						                    value="selectedItems">
+						                  </ng-multiselect-dropdown>
+						               </div>
+						               <div class="form-group">
+						               <input type="search" class="form-control form-control-lg" placeholder="Unesite pojam pretrage.."
+                           				 name="erwr" [(ngModel)]="f.query">
+						               </div>
+						               <div class="form-group">
+							               <div class="icheck-primary d-inline">
+					                        <input type="checkbox" id="checkboxPrimary1" name="fdf" [(ngModel)]="f.isPhrase">
+					                       <label >Fraza
+					                        </label>
+					                      </div>
+						               </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                 <div class="form-group" id= "submitId">
+ 					<input type="submit" value="Pretrazi" class="btn btn-block btn-outline-primary" >
+ 					</div>
+ 					</form>
+                    </div>
+                    
+                    <div class="list-group-item" *ngFor="let b of advancedBooks">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">Pisac: {{b.bookUnit.writer}}</div>
+                                        <h3>{{b.bookUnit.title}}</h3>
+                                        <h5><i>{{b.bookUnit.genre}}</i></h5>
+                                        <p class="mb-0" [innerHTML]="b.highlights"></p>
+                                        <div class="float-right">
+                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.bookUnit.openaccess || !logged" >
+		                     	 		Kupi</button>
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.bookUnit.openaccess || !logged" >
+				                     	 	Preuzmi
+				                      	</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>                
         </div>
-     </div>
-</section-->
-
-
+    </section>
 
 </div>

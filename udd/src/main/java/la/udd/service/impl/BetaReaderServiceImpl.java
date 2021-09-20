@@ -17,6 +17,7 @@ public class BetaReaderServiceImpl implements BetaReaderService{
 
 	@Override
 	public boolean add(BetaReader b) {
+		//betaReaderRepository.index(b);
 		b = betaReaderRepository.save(b);
 		if (b!=null)
 			return true;
@@ -29,12 +30,4 @@ public class BetaReaderServiceImpl implements BetaReaderService{
 		return betaReaderRepository.findAll();
 	}
 
-	@Override
-	public boolean update(BetaReader b) {
-		b = betaReaderRepository.save(b);
-		if(b!=null)
-			return true;
-		else
-			return false;
-	}
 }

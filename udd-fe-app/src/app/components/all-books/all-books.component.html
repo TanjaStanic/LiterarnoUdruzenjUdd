@@ -1,0 +1,43 @@
+  <div class="content-wrapper">
+
+<section class="content-header">
+      <div class="container-fluid">
+        <h5 class="text-center display-4">Pregled objavljenih knjiga</h5>
+      </div>
+</section>
+
+
+    <section class="content">
+        <div class="container-fluid">
+        
+            <div class="row mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="list-group">
+                                        
+                   
+                    
+                    <div class="list-group-item" *ngFor="let b of books">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">Pisac: {{b.writer}}</div>
+                                        <h3>{{b.title}}</h3>
+                                        <h5><i>{{b.genre}}</i></h5>
+                                        <div class="float-right">
+                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.openaccess || !logged" (click)="buyBook()">
+		                     	 		Kupi</button>
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess || !logged" >
+				                     	 	Preuzmi
+				                      	</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>                
+        </div>
+    </section>
+    </div>

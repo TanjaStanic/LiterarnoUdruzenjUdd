@@ -19,7 +19,8 @@ spring:
   data:
     elasticsearch:
       host: localhost
-      cluster-name: Cluster
+   
+      
 
 
 elasticsearch:

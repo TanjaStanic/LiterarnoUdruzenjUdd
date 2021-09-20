@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Document(indexName = BetaReader.INDEX_NAME, shards = 1, replicas = 0)
+@Document(indexName = BetaReader.INDEX_NAME,shards = 1, replicas = 0)
 @Getter
 @Setter
 @NoArgsConstructor

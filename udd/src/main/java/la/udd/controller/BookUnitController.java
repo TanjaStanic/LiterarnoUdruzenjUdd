@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +58,18 @@ public class BookUnitController {
 		
 		System.out.println("In save book unit");
 		bookUnitService.add(bookUnit);
+		
+		return new ResponseEntity<String>("Successfully uploaded!", HttpStatus.OK);
+	}
+	
+	@PostMapping("/saveBookUnits")
+	public ResponseEntity<String> saveBookUnits(@RequestBody List<BookUnit> bookUnits) {
+		
+		System.out.println("In save book units!");
+		for (BookUnit b : bookUnits) {
+			bookUnitService.add(b);
+		}
+		
 		
 		return new ResponseEntity<String>("Successfully uploaded!", HttpStatus.OK);
 	}

@@ -31,13 +31,5 @@ public class BookRejectedUnitServiceImpl implements BookRejectedUnitService {
 
 	}
 
-	@Override
-	public boolean update(BookRejectedUnit b) {
-		b = bookUnitRepository.save(b);
-		if(b!=null)
-			return true;
-		else
-			return false;
-	}
 
 }

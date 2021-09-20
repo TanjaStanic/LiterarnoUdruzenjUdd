@@ -2,11 +2,12 @@ package la.udd.service;
 
 import java.io.File;
 
-import la.udd.elastic.BookUnit;
+import org.springframework.stereotype.Service;
 
+import la.udd.elastic.BookUnit;
+@Service
 public interface BookUnitService {
 	public boolean add(BookUnit b);
 	public Iterable<BookUnit> findAll();
-	public boolean update(BookUnit b);
 	public int index(File file);
 }

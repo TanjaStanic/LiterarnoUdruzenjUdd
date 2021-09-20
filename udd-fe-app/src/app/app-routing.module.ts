@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { SendToBetaComponent } from './components/send-to-beta/send-to-beta.component';
+import { AllBooksComponent } from './components/all-books/all-books.component';
 
 
 const routes: Routes = [
@@ -16,12 +17,20 @@ const routes: Routes = [
       },
      {
           path: 'homepage',
-          component: HomepageComponent
+          component: AllBooksComponent
         },
      	{
             path: 'betareaders',
             component: SendToBetaComponent
-          }              ];
+          },
+     	{
+              path: '',
+              component: AllBooksComponent
+            },
+     	{
+                path: 'search',
+                component: HomepageComponent
+              }               ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

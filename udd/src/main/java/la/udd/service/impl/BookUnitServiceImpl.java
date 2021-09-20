@@ -26,8 +26,10 @@ public class BookUnitServiceImpl implements BookUnitService {
 	
 	@Override
 	public boolean add(BookUnit b) {
+		//b = bookUnitRepository.index(b);
 		b =  bookUnitRepository.save(b);
 		if (b!=null) {
+			
 			return true;
 		}
 		else
@@ -37,15 +39,6 @@ public class BookUnitServiceImpl implements BookUnitService {
 	@Override
 	public Iterable<BookUnit> findAll() {
 		return bookUnitRepository.findAll();
-	}
-
-	@Override
-	public boolean update(BookUnit b) {
-		b = bookUnitRepository.save(b);
-		if(b!=null)
-			return true;
-		else
-			return false;
 	}
 
 	@Override

@@ -1,7 +1,15 @@
 package la.udd.config;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import javax.servlet.http.HttpServletResponse;
 
+import org.elasticsearch.client.Client;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.transport.TransportAddress;
+import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +59,19 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 	    return super.authenticationManagerBean();
 	}
+	@Bean
+    public Client getClient() throws UnknownHostException {
+        Settings setting = Settings
+            .builder()
+            .put("client.transport.sniff", true)
+            .put("path.home", "/usr/share/elasticsearch") //elasticsearch home path
+            .put("cluster.name", "Cluster")
+            .build();
+        //please note that client port here is 9300 not 9200! 
+        TransportClient client = new PreBuiltTransportClient(setting)
+            .addTransportAddress(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300)); 
+        return client;
+    }
 	
 	// If all else fails - turn off security by uncommenting these 3 lines
     @Override
@@ -59,6 +80,7 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
       web.ignoring().antMatchers(HttpMethod.POST, "/auth/userprofile/**");
       web.ignoring().antMatchers(HttpMethod.POST, "/auth/logout");
       web.ignoring().antMatchers(HttpMethod.POST, "/book/**");
+      web.ignoring().antMatchers(HttpMethod.POST, "/search/**");
       web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
       web.ignoring().antMatchers("/**");
     }
@@ -95,7 +117,8 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
           .permitAll()
           .antMatchers("/book/**")
           .permitAll()
-
+          .antMatchers("/search/**")
+          .permitAll()
           // Our private endpoints
           .anyRequest()
           .authenticated();
