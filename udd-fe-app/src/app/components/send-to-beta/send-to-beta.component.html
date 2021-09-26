@@ -27,19 +27,19 @@
                                         <br>
                                         <br>
                                         <div class="icheck-primary d-inline">
-					                        <input type="checkbox" id="geoId" name="geoId" [(ngModel)]="checkboxValue" [disabled]="b.status!='Odobrena'">
-					                       <label > <b> Ukljuci geoprostornu pretragu </b>
+					                        <input type="checkbox" id="geoId" name="geoId" [(ngModel)]="checkboxValue" [hidden]="b.status!='Odobrena' || b.filename==null">
+					                       <label [hidden]="b.status!='Odobrena' || b.filename==null" > <i> Ukljuci geoprostornu pretragu </i>
 					                        </label>
 					                      </div>
-                                        <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Odobrena'" (click)="searchBeta(b.id)">
+                                        <button type="button" class="btn btn-block btn-outline-warning" [hidden]="b.status!='Odobrena' || b.filename==null" (click)="searchBeta(b.id)">
                      	 					Pretrazi beta citaoce</button>
                      	 				</div>
                                         <div class="float-right">      
-                                        <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="activateBook(b.id)">
+                                        <button type="button" class="btn btn-block btn-outline-primary" [disabled]="b.status!='Na cekanju'" (click)="activateBook(b.id)">
                      	 					Zahtjevaj PDF</button>
-		                     	 		<button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="rejectBook(b.id)">
+		                     	 		<button type="button" class="btn btn-block btn-outline-danger" [disabled]="b.status!='Na cekanju'" (click)="rejectBook(b.id)">
 				                     	 	Odbij</button>
-				                     	 <button type="button" class="btn btn-block btn-default" [disabled]="!b.filename || b.status=='Objavljena' " (click)="publishBookUnit(b.id)">
+				                     	 <button type="button" class="btn btn-block btn-outline-success" [disabled]="!b.filename || b.status=='Objavljena' " (click)="publishBookUnit(b.id)">
 				                     	 Objavi</button>
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                         
                      	 				</div>
                                         <div class="float-right">      
-                                        <button type="button" class="btn btn-block btn-default"  (click)="sendToBeta(b)">
+                                        <button type="button" class="btn btn-block btn-outline-primary"  (click)="sendToBeta(b)">
                      	 					Posalji knjigu</button>
 		                     	 		
                                         </div>

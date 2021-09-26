@@ -61,6 +61,9 @@ export class SendToBetaComponent implements OnInit {
 					  console.log("My books");
 					  console.log(data);
 					  this.myBooks = data;
+					  this.myBooks.sort((a:any,b:any) => a.status.localeCompare(b.status));
+						console.log(this.myBooks)
+
 				  },
 				  err => {
 					  

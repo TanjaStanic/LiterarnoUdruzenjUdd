@@ -26,6 +26,7 @@ export class HomepageComponent implements OnInit {
 	bookUnits : any;
 	books : any;
 	items = Array();
+	visible : boolean;
 	
 	//dropdown
 	enumValues = [];
@@ -67,7 +68,7 @@ export class HomepageComponent implements OnInit {
   	}
   
   ngOnInit() {
-
+		this.visible = false;
 	  //for loggeeed user
 	    this.token = this.auth.getJwtToken();
 	    console.log('Token je ');
@@ -82,7 +83,6 @@ export class HomepageComponent implements OnInit {
 	     }
 	    //get all books
 	    this.getPublishedBooks();
-	    
 	    //for dropdown
 
   }
@@ -116,9 +116,11 @@ export class HomepageComponent implements OnInit {
 
 	  
 	  addField() {
+		   
 		    let newM = new AdvancedQuery();
 		   
 		    this.fieldList.push(newM);
+		this.visible = true;
 		  }
 	  
 	  onSubimitBasic() {

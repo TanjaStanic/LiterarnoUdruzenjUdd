@@ -105,11 +105,11 @@
                       <td>{{b.genre}}</td>
                       <td>{{b.synopsis}}</td>
                       <td >
-                     	 <input type="file" [disabled]="b.status != 'Odobrena' "  id="fileId" accept=".pdf" placeholder="Odaberi ..." (change)="onFileSelected($event)">
+                     	 <input type="file" [disabled]="b.status != 'Odobrena' || b.filename!=null "  id="fileId" accept=".pdf" placeholder="Odaberi ..." (change)="onFileSelected($event)">
                                           
                       </td>
                       <td>
-                      <button type="button" class="btn btn-block btn-default" [disabled]="b.status != 'Odobrena'" (click)="uploadFile(b.id)" >Potvrdi                    
+                      <button type="button" class="btn btn-block btn-default" [disabled]="b.status != 'Odobrena' || b.filename!=null" (click)="uploadFile(b.id)" >Potvrdi                    
                 
                       </button>
                                              

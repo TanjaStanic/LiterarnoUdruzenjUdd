@@ -52,4 +52,104 @@ public class BetaReader {
 	@GeoPointField
 	private GeoPoint location;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public GeoPoint getLocation() {
+		return location;
+	}
+
+	public void setLocation(GeoPoint location) {
+		this.location = location;
+	}
+
+	public static String getIndexName() {
+		return INDEX_NAME;
+	}
+
+	public static String getTypeName() {
+		return TYPE_NAME;
+	}
+
+	public static String getDatePattern() {
+		return DATE_PATTERN;
+	}
+
+	public BetaReader(Long id, String firstName, String lastName, String email, String username, String city,
+			String country, String genre, GeoPoint location) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.username = username;
+		this.city = city;
+		this.country = country;
+		this.genre = genre;
+		this.location = location;
+	}
+	
+	
+
 }

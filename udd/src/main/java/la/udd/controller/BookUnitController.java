@@ -51,6 +51,7 @@ public class BookUnitController {
 		
 		bookUnitService.add(bookUnit);
 		book.setStatus("Objavljena");
+		book.setIsbn(Integer.toString(1000 + (int)(Math.random() * ((9999 -1000 ) + 1))));
 		bookRepository.save(book);
 		
 		return new ResponseEntity<String>("Successfully published!", HttpStatus.OK);
