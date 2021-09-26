@@ -23,6 +23,7 @@ import la.udd.model.Book;
 import la.udd.repository.BookRepository;
 import la.udd.service.BookRejectedUnitService;
 import la.udd.service.BookUnitService;
+import la.udd.service.impl.BookServiceImpl;
 
 @RestController
 @RequestMapping(value = "/bookUnit")
@@ -33,20 +34,23 @@ public class BookUnitController {
 	private BookUnitService bookUnitService;
 	
 	@Autowired
-	BookRepository bookRepository;
+	private BookRepository bookRepository;
 	
 	@Autowired
-	private BookRejectedUnitService bookRejectedUnitService;
+	private BookServiceImpl bookService;
+	
+	
 	
 	@GetMapping(path = "/publishBook/{idBook}", produces = "application/json")
-	public ResponseEntity<String> publishBookUnit(@PathVariable("idBook") Long id) {
+	public ResponseEntity<String> publishBookUnit(@PathVariable("idBook") Long id) throws IOException {
 		System.out.println("In save book unit");
 		Book book = bookRepository.findOneById(id);
+		String content = bookService.getContent(book.getFilename());
 		BookUnit bookUnit = new BookUnit(book.getId(),book.getFilename(), book.getTitle(), book.getWriter().getFirstName()+" "+book.getWriter().getLastName(),
-				book.getGenre(), book.getIsOpenAccess());
+				book.getGenre(), book.getIsOpenAccess(), content);
 		
 		bookUnitService.add(bookUnit);
-		book.setStatus("Objavlejna");
+		book.setStatus("Objavljena");
 		bookRepository.save(book);
 		
 		return new ResponseEntity<String>("Successfully published!", HttpStatus.OK);
@@ -81,32 +85,31 @@ public class BookUnitController {
 		return bookUnitService.findAll();
 	}
 	
-	@GetMapping("/getBookUnitsRejected")
-	public Iterable<BookRejectedUnit> getBookUnitsRejected(){
-		System.out.println("In get book units rejected");
-		return bookRejectedUnitService.findAll();
-	}
+
     
-	/*@GetMapping("/reindex")
+	@GetMapping("/reindex")
     public ResponseEntity<String> index() throws IOException {
-        File dataDir = getResourceFilePath("target\\classes\\files");
-		long start = new Date().getTime();
-        int numIndexed = bookUnitService.index(dataDir);
-        long end = new Date().getTime();
-        String text = "Indexing " + numIndexed + " files took "
-            + (end - start) + " milliseconds";
-        return new ResponseEntity<String>(text, HttpStatus.OK);
+        List<Book> books = bookService.getAllPublished();
+        
+        for (Book b : books) {
+        	String content = bookService.getContent(b.getFilename());
+        	
+        	String writer = b.getWriter().getFirstName() + " " + b.getWriter().getLastName();
+        	
+        	BookUnit bu = new BookUnit(b.getId(), b.getFilename(),
+        			b.getTitle(), writer, b.getGenre(), b.getIsOpenAccess(), content);
+        			
+        	bookUnitService.add(bu);
+        }
+		
+        return new ResponseEntity<>("Indexed", HttpStatus.OK);
+
     }
     
-    private File getResourceFilePath(String path) {
-        URL url = this.getClass().getClassLoader().getResource(path);
-        System.out.println("Url je: " + url.toString());
-        File file = null;
-        try {
-            file = new File(url.toURI());
-        } catch (URISyntaxException e) {
-            file = new File(url.getPath());
-        }
-        return file;
-    }*/
+    @GetMapping("/deleteAll")
+	public ResponseEntity<String> deleteAll(){
+		System.out.println("In delete book units ");
+		bookUnitService.deleteAll();
+		return new ResponseEntity<String>("Successfully deleted!", HttpStatus.OK);
+	}
 }

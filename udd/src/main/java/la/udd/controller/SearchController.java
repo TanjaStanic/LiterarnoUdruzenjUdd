@@ -149,6 +149,7 @@ public class SearchController {
         System.out.println(request);
         
         SearchResponse response = request.execute().actionGet();
+        
         System.out.println(response.toString());
         retVal = getResponse(response);
         System.out.println(retVal.size());
@@ -158,12 +159,6 @@ public class SearchController {
 		
 	}
 	
-	
-	
-	
-	
-	
-
 	 private ArrayList<QueryResponseDTO> getResponse(SearchResponse response){
 	        ArrayList<QueryResponseDTO> retVal = new ArrayList<>();
 	        for(SearchHit hit : response.getHits().getHits()) {
@@ -193,13 +188,6 @@ public class SearchController {
 	        }
 	        return retVal;
 	    }	
-		@GetMapping (path="/findBetaReaderByGenre")
-		public ResponseEntity<?> findBetaReaderByGenre(@PathVariable Long id) {
-			
-		//	Book book = bookRepository.findOneById(id);
 
-			
-			return null;
-		}
 
 }

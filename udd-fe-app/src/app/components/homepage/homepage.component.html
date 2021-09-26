@@ -161,9 +161,9 @@
                                         <h5><i>{{b.bookUnit.genre}}</i></h5>
                                         <p class="mb-0" [innerHTML]="b.highlights"></p>
                                         <div class="float-right">
-                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.bookUnit.openaccess || !logged" >
+                                        <button type="button" class="btn btn-success btn-block" [hidden]="b.bookUnit.openaccess || !logged" (click)="buyBook()">
 		                     	 		Kupi</button>
-		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.bookUnit.openaccess || !logged" >
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.bookUnit.openaccess || !logged" (click)="downloadBook()">
 				                     	 	Preuzmi
 				                      	</button>
                                         </div>

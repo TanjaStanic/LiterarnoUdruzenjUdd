@@ -81,6 +81,7 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
       web.ignoring().antMatchers(HttpMethod.POST, "/auth/logout");
       web.ignoring().antMatchers(HttpMethod.POST, "/book/**");
       web.ignoring().antMatchers(HttpMethod.POST, "/search/**");
+      web.ignoring().antMatchers(HttpMethod.POST, "/betaReader/**");
       web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "/favicon.ico", "/**/*.html", "/**/*.css", "/**/*.js");
       web.ignoring().antMatchers("/**");
     }
@@ -118,6 +119,8 @@ public class WebSercurityConfig extends WebSecurityConfigurerAdapter{
           .antMatchers("/book/**")
           .permitAll()
           .antMatchers("/search/**")
+          .permitAll()
+          .antMatchers("/betaReader/**")
           .permitAll()
           // Our private endpoints
           .anyRequest()

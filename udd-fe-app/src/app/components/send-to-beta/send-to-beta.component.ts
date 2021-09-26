@@ -1,3 +1,4 @@
+import {SearchServiceService} from './../../services/search-service.service';
 import {Book} from './../../models/book';
 import {User} from './../../models/user';
 import { Component, OnInit } from '@angular/core';
@@ -17,11 +18,19 @@ export class SendToBetaComponent implements OnInit {
 	logged: boolean;
 	notLogged: boolean;
 	token: any;
-	user : User;
+	user : any;
 	id_logged : number;
 	book : Book = new Book();
-	myBooks : any;
-  constructor(private userService: UserServiceService,private auth: AuthServiceService, private bookService: BookUnitServiceService, private route: ActivatedRoute, private router : Router) { }
+	myBooks : any
+
+	//beta
+	betaReaders : any;
+	checkboxValue: boolean = false;
+  constructor(private userService: UserServiceService,private auth: AuthServiceService, 
+		  private bookService: BookUnitServiceService, 
+		  private route: ActivatedRoute, 
+		  private router : Router,
+		  private searchService: SearchServiceService) { }
 
 	  ngOnInit() {
 		    this.token = this.auth.getJwtToken();
@@ -89,4 +98,28 @@ export class SendToBetaComponent implements OnInit {
 				});
 		
 	}
+	
+	searchBeta(id_book) {
+		console.log(this.checkboxValue)
+		this.searchService.searchBetaReaders(id_book,this.checkboxValue).subscribe(
+				data => {
+					console.log(data)
+					this.betaReaders = data;
+				},
+				err => {
+					console.log(err)
+				});
+	}
+	
+	sendToBeta(reader){
+		window.alert("Poslano beta citaocu")
+		this.betaReaders = this.arrayRemove(this.betaReaders, reader);
+	}
+	
+	 arrayRemove(arr, value) { 
+		    
+	        return arr.filter(function(ele){ 
+	            return ele != value; 
+	        });
+	    }
 }

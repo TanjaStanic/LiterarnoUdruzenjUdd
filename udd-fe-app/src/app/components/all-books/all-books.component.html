@@ -26,7 +26,7 @@
                                         <div class="float-right">
                                         <button type="button" class="btn btn-success btn-block" [hidden]="b.openaccess || !logged" (click)="buyBook()">
 		                     	 		Kupi</button>
-		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess || !logged" >
+		                     	 		<button type="button" class="btn btn-success btn-block" [hidden]="!b.openaccess || !logged" (click)="downloadBook()">
 				                     	 	Preuzmi
 				                      	</button>
                                         </div>

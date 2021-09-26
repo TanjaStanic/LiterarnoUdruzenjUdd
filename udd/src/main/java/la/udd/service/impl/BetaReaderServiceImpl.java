@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import la.udd.elastic.BetaReader;
 import la.udd.repository.BetaReaderRepository;
 import la.udd.service.BetaReaderService;
-import la.udd.service.BookUnitService;
 
 @Service
 public class BetaReaderServiceImpl implements BetaReaderService{
@@ -17,7 +16,6 @@ public class BetaReaderServiceImpl implements BetaReaderService{
 
 	@Override
 	public boolean add(BetaReader b) {
-		//betaReaderRepository.index(b);
 		b = betaReaderRepository.save(b);
 		if (b!=null)
 			return true;
@@ -29,5 +27,16 @@ public class BetaReaderServiceImpl implements BetaReaderService{
 	public Iterable<BetaReader> findAll() {
 		return betaReaderRepository.findAll();
 	}
-
+	   
+	
+	public void deleteAll() {
+	    	try {
+	    		System.out.println("Deleting all");
+	    		betaReaderRepository.deleteAll();
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            System.out.println("Can't delete");
+	        }
+	    }
 }

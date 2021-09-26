@@ -2,6 +2,7 @@ package la.udd.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import la.udd.config.JwtTokenUtils;
 import la.udd.model.User;
 import la.udd.model.auth.JwtAuthenticationRequest;
 import la.udd.repository.UserRepository;
-
 @RestController
 @RequestMapping(value = "/auth")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -86,5 +86,13 @@ public class AuthController {
 	    		
 		return  new ResponseEntity<User>(user, HttpStatus.OK);
 	}
-	
+	@RequestMapping(value="/logout", method = RequestMethod.GET,
+			consumes = MediaType.APPLICATION_JSON_VALUE,
+			produces = MediaType.APPLICATION_JSON_VALUE)
+			public void logOutUser( HttpServletRequest request){
+		
+				System.out.println("Logout u auth-service");
+								 
+				SecurityContextHolder.clearContext();
+			}
 }

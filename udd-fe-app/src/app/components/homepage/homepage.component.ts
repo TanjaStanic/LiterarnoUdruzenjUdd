@@ -27,7 +27,6 @@ export class HomepageComponent implements OnInit {
 	books : any;
 	items = Array();
 	
-	
 	//dropdown
 	enumValues = [];
 	  dropdownList = Array();
@@ -180,5 +179,11 @@ export class HomepageComponent implements OnInit {
 		    err => {
 		      console.log("Error occured");
 		    })
+	  }
+	  buyBook() {
+		  window.alert("Knjiga je dodana u korpu")
+	  }
+	  downloadBook() {
+		  window.alert("Knjiga se preuzima")
 	  }
 }

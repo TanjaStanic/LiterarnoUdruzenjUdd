@@ -41,15 +41,18 @@ public class User  {
 
 	@Column 
 	private String country;
+	
+	@Column 
+	private String genre;
 
 	@Column 
 	private Boolean activated;
-	  
-	@Column 
-	private Boolean confirmed;
 
-	@Column 
-	private int points;
+	@Column(nullable = false)
+	private Double latitude;
+
+	@Column(nullable = false)
+	private Double longitude;
 	
 	@Column
 	private Role role;
@@ -64,7 +67,5 @@ public class User  {
 	
 	public User() {
 		    activated = false;
-		    confirmed = false;
-		    this.points = 0;
 	}
 }

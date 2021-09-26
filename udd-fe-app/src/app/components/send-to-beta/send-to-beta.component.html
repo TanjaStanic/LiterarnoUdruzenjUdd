@@ -1,84 +1,99 @@
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
+
+<section class="content-header">
       <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <h1>Pregled knjiga</h1>
-          </div>
+        <h5 class="text-center display-4">Pregled knjiga</h5>
+      </div>
+</section>
+
+  <section class="content">
+        <div class="container-fluid">
+        
+            <div class="row mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="list-group">
+                                        
+                   
+                    
+                    <div class="list-group-item" *ngFor="let b of myBooks">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">Status: <b> {{b.status}}</b></div>
+                                        <h3>{{b.title}}</h3>
+                                        <h5>zanr: <b><i>{{b.genre}}</i></b></h5>
+                                        <p class="mb-0">{{b.synopsis}}</p>
+                                        <div class="float-left"> 
+                                        <br>
+                                        <br>
+                                        <div class="icheck-primary d-inline">
+					                        <input type="checkbox" id="geoId" name="geoId" [(ngModel)]="checkboxValue" [disabled]="b.status!='Odobrena'">
+					                       <label > <b> Ukljuci geoprostornu pretragu </b>
+					                        </label>
+					                      </div>
+                                        <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Odobrena'" (click)="searchBeta(b.id)">
+                     	 					Pretrazi beta citaoce</button>
+                     	 				</div>
+                                        <div class="float-right">      
+                                        <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="activateBook(b.id)">
+                     	 					Zahtjevaj PDF</button>
+		                     	 		<button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="rejectBook(b.id)">
+				                     	 	Odbij</button>
+				                     	 <button type="button" class="btn btn-block btn-default" [disabled]="!b.filename || b.status=='Objavljena' " (click)="publishBookUnit(b.id)">
+				                     	 Objavi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>                
         </div>
-      </div><!-- /.container-fluid -->
     </section>
     
-     <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-12">
- 				<div class="card">
-
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th>ISBN</th>
-                      <th>Status</th>
-                      <th>Naslov</th>
-                      <th>Zanr</th>
-                      <th>Sinopsis</th>
-                      <th>Status</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr	*ngFor="let b of myBooks">
-                      <td>{{b.isbn}}</td>
-                      <td>{{b.status}}</td>
-                      <td>{{b.title}}</td>
-                      <td>{{b.genre}}</td>
-                      <td>{{b.synopsis}}</td>
-                      <td>
-                     	 <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="activateBook(b.id)">
-                     	 	Zahtjevaj PDF</button>
-                      </td>
-                      <td>
-                     	 <button type="button" class="btn btn-block btn-default" [disabled]="b.status!='Na cekanju'" (click)="rejectBook(b.id)">
-                     	 	Odbij
-                      	</button>
-                      </td>
-                      <td>
-                      <button type="button" class="btn btn-block btn-default" [disabled]="!b.filename || b.status=='Objavljena' " (click)="publishBookUnit(b.id)">Odobri
-         				</button>
-                      </td>
-                    </tr>
+  <section class="content">
+        <div class="container-fluid">
+        
+            <div class="row mt-3">
+                <div class="col-md-10 offset-md-1">
+                    <div class="list-group">
+                             <br>       <br>     <br> 
+                   
                     
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-         </div>
-        </div>      
-     </div>
-   
-</section>
+                    <div class="list-group-item" *ngFor="let b of betaReaders">
+                            <div class="row">
+                                 <div class="col px-4">
+                                    <div>
+                                        <div class="float-right">
+                                        Grad: <b> {{b.city}}</b>
+                                        <br>
+                                        Drzava: <b> {{b.country}}</b>
+                                        </div>
+                                        <h3>{{b.firstName}} {{b.lastName}}</h3>
+                                        <h5>zanr: <b><i>{{b.genre}}</i></b></h5>
+                                        
+                                        <div class="float-left"> 
+                                        <br>
+                                        <br>
 
-<section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-18">
-            <!-- general form elements -->
-            <div class="card card-info">
-           
-              <!-- /.card-header -->
-              <!-- form start -->
-           
-         
-            </div>
-         </div>
+                                        
+                     	 				</div>
+                                        <div class="float-right">      
+                                        <button type="button" class="btn btn-block btn-default"  (click)="sendToBeta(b)">
+                     	 					Posalji knjigu</button>
+		                     	 		
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>                
         </div>
-     </div>
-</section>
-</div>
+    </section>
+    </div>    
+

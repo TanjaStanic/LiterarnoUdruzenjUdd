@@ -52,5 +52,7 @@ export class AllBooksComponent implements OnInit {
   buyBook() {
 	  window.alert("Knjiga je dodana u korpu!")
   }
-  
+  downloadBook() {
+	  window.alert("Knjiga se preuzima")
+  }
 }

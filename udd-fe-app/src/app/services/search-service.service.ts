@@ -15,4 +15,7 @@ export class SearchServiceService {
   searchAdvanced(list : any){
 	    return this.http.post('http://localhost:8080/search/advanced', list, {headers: this.auth.createAuthorizationTokenHeader()});
 	}
+  searchBetaReaders(id : number, includeLocation: boolean){
+	    return this.http.get('http://localhost:8080/betaReader/getBetaReaders/'+id+"/"+includeLocation, {headers: this.auth.createAuthorizationTokenHeader()});
+  }
 }

@@ -34,12 +34,24 @@ public class BookUnitServiceImpl implements BookUnitService {
 		}
 		else
 			return false;
+		
 	}
 
 	@Override
 	public Iterable<BookUnit> findAll() {
 		return bookUnitRepository.findAll();
 	}
+    @Override
+    public void deleteAll() {
+    	try {
+    		System.out.println("Deleting all");
+            bookUnitRepository.deleteAll();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Can't delete");
+        }
+    }
 
 	@Override
 	public int index(File file) {
@@ -57,7 +69,6 @@ public class BookUnitServiceImpl implements BookUnitService {
                 if (newFile.isFile()) {
                     BookUnit book = b;
                     book.setTitle(b.getTitle());
-                    book.setKeywords(b.getKeywords());
                     book.setFilename(b.getFilename());
                     book.setWriter(b.getWriter());
                     book.setGenre(b.getGenre());
@@ -90,8 +101,7 @@ public class BookUnitServiceImpl implements BookUnitService {
             String title = "" + info.getTitle();
             book.setTitle(title);
 
-            String keywords = "" + info.getKeywords();
-            book.setKeywords(keywords);
+
 
             book.setFilename(file.getCanonicalPath());
 
@@ -126,4 +136,6 @@ public class BookUnitServiceImpl implements BookUnitService {
         }
         return null;
     }
+    
+
 }

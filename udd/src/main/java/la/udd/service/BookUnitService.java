@@ -10,4 +10,5 @@ public interface BookUnitService {
 	public boolean add(BookUnit b);
 	public Iterable<BookUnit> findAll();
 	public int index(File file);
+	public void deleteAll();
 }
