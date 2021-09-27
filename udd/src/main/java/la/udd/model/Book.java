@@ -31,7 +31,6 @@ public class Book {
 	@Column
 	private String isbn;
 	
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="writer_id")
 	private User writer;
@@ -41,14 +40,12 @@ public class Book {
 	@JoinColumn(name="editor_id")
 	private User editor;
 	
-	@Column private String status;
+	@Column private Status status;
 		  
 	@Column private String synopsis;
 	
 	@Column private Boolean isOpenAccess;
-	
-	@Column private Boolean activated;
-	
+		
 	@Column private String genre;
 
 	public Long getId() {
@@ -99,14 +96,6 @@ public class Book {
 		this.editor = editor;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public String getSynopsis() {
 		return synopsis;
 	}
@@ -123,20 +112,20 @@ public class Book {
 		this.isOpenAccess = isOpenAccess;
 	}
 
-	public Boolean getActivated() {
-		return activated;
-	}
-
-	public void setActivated(Boolean activated) {
-		this.activated = activated;
-	}
-
 	public String getGenre() {
 		return genre;
 	}
 
 	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	
 	

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import la.udd.model.Book;
+import la.udd.model.Status;
 import la.udd.repository.BookRepository;
 
 import org.apache.pdfbox.cos.COSDocument;
@@ -27,7 +28,7 @@ import org.springframework.core.io.UrlResource;
 @Service
 public class BookServiceImpl {
 	
-	private String files = "C:\\Users\\Korisnik\\git\\LiterarnoUdruzenjeUdd\\udd\\files\\";
+	private String files = "C:\\Users\\mecha\\git\\LiterarnoUdruzenjeUdd\\udd\\files\\";
 	
 	@Autowired
 	private BookRepository bookRepository;
@@ -38,7 +39,7 @@ public class BookServiceImpl {
 		books = bookRepository.findAll();
 		
 		for (Book b : books) {
-			if (b.getStatus().equals("Objavljena")) {
+			if (b.getStatus().equals(Status.OBJAVLJENA) && b.getFilename()!=null) {
 				retVal.add(b);
 			}
 		}

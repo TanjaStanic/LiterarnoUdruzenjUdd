@@ -20,6 +20,7 @@ import java.net.URL;
 import la.udd.elastic.BookRejectedUnit;
 import la.udd.elastic.BookUnit;
 import la.udd.model.Book;
+import la.udd.model.Status;
 import la.udd.repository.BookRepository;
 import la.udd.service.BookRejectedUnitService;
 import la.udd.service.BookUnitService;
@@ -50,7 +51,7 @@ public class BookUnitController {
 				book.getGenre(), book.getIsOpenAccess(), content);
 		
 		bookUnitService.add(bookUnit);
-		book.setStatus("Objavljena");
+		book.setStatus(Status.OBJAVLJENA);
 		book.setIsbn(Integer.toString(1000 + (int)(Math.random() * ((9999 -1000 ) + 1))));
 		bookRepository.save(book);
 		
@@ -103,7 +104,7 @@ public class BookUnitController {
         	bookUnitService.add(bu);
         }
 		
-        return new ResponseEntity<>("Indexed", HttpStatus.OK);
+        return new ResponseEntity<>("Successfully indexed!", HttpStatus.OK);
 
     }
     

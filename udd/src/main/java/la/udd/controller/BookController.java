@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.core.io.Resource;
 import la.udd.model.Book;
+import la.udd.model.Status;
 import la.udd.model.User;
 import la.udd.repository.BookRepository;
 import la.udd.repository.UserRepository;
@@ -59,38 +60,18 @@ public class BookController {
 	public ResponseEntity<?> addBookToWriter(@PathVariable("idWriter") Long id, @RequestBody Book book){
 		User writer = userRepository.findOneById(id);
 		User editor = userRepository.findOneById((long)2);
-		book.setActivated(false);
 		book.setWriter(writer);
 		book.setEditor(editor);
-		book.setStatus("Na cekanju");
+		book.setStatus(Status.KREIRANA);
 		
 		book = bookRepository.save(book);
 		return new ResponseEntity<>("Success", HttpStatus.OK);
 	}
-	
-	
-	@GetMapping(path = "/getAllActivatedBooks", produces = "application/json")
-    public ResponseEntity<?> getAllActivatedBooks() {
-			List<Book> books = new ArrayList<Book>(); 
-			List<Book> retVal = new ArrayList<Book>(); 
-			books = bookRepository.findAll();
-			if (!books.isEmpty()) {
-				for (Book b : books) {
-					if (b.getActivated()) {
-						retVal.add(b);
-					}
-				}
-				return new ResponseEntity<>(retVal,HttpStatus.OK);
-			}else {
-				return new ResponseEntity<>(null,HttpStatus.OK);
-			}
-	}
-	
-	@GetMapping(path="/activateBook/{idBook}", produces = "application/json")
-	public ResponseEntity<?> activateBook(@PathVariable("idBook") Long id){
+		
+	@GetMapping(path="/acceptBook/{idBook}", produces = "application/json")
+	public ResponseEntity<?> acceptBook(@PathVariable("idBook") Long id){
 		Book book = bookRepository.findOneById(id);
-		book.setActivated(true);
-		book.setStatus("Odobrena");
+		book.setStatus(Status.NA_CEKANJU);
 		book = bookRepository.save(book);
 		
 		return new ResponseEntity<>("Success", HttpStatus.OK);
@@ -99,8 +80,7 @@ public class BookController {
 	@GetMapping(path="/rejectBook/{idBook}", produces = "application/json")
 	public ResponseEntity<?> rejectBook(@PathVariable("idBook") Long id){
 		Book book = bookRepository.findOneById(id);
-		book.setActivated(true);
-		book.setStatus("Odbijena");
+		book.setStatus(Status.ODBIJENA);
 		book = bookRepository.save(book);
 		
 		return new ResponseEntity<>("Success", HttpStatus.OK);
@@ -113,6 +93,8 @@ public class BookController {
 		System.out.print("Name, content "+ file.getName() + file.getOriginalFilename());
 		Book book = bookRepository.findOneById(id);
 		book.setFilename(file.getOriginalFilename());
+		book.setStatus(Status.ODOBRENA);
+		book.setIsOpenAccess(true);
 		book = bookRepository.save(book);
 		
 		String returnValue ="";

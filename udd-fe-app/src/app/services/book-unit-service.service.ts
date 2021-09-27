@@ -29,10 +29,10 @@ export class BookUnitServiceService {
 	  console.log("in get books editor service id: "+id);
       return this.http.get('http://localhost:8080/book/getAllBooksEditor/'+id, {headers: this.auth.createAuthorizationTokenHeader()});
   }
-  activateBook(id: number) {
+  acceptBook(id: number) {
       console.log('in activate book service : ' + id );
 
-      return this.http.get('http://localhost:8080/book/activateBook/'+id, {responseType: 'text'});
+      return this.http.get('http://localhost:8080/book/acceptBook/'+id, {responseType: 'text'});
      }
   rejectBook(id: number) {
       console.log('in activate book service : ' + id );
@@ -58,5 +58,19 @@ export class BookUnitServiceService {
   getPublishedBooks(){
 	  return this.http.get('http://localhost:8080/bookUnit/getBookUnits', {headers: this.auth.createAuthorizationTokenHeader()});
   }
+
+ //admin controls
+	reindexBooks(){
+		 return this.http.get('http://localhost:8080/bookUnit/reindex',{responseType: 'text'});
+	}
+	reindexBetaReaders(){
+		return this.http.get('http://localhost:8080/betaReader/reindex',{responseType: 'text'});
+	}
+	deleteBooks(){
+		 return this.http.get('http://localhost:8080/bookUnit/deleteAll',{responseType: 'text'});
+	}
+	deleteBetaReaders(){
+		return this.http.get('http://localhost:8080/betaReader/deleteAll',{responseType: 'text'});
+	}
 
 }

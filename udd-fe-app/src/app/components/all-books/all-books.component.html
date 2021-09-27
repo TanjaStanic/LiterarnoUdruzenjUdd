@@ -40,4 +40,35 @@
             </div>                
         </div>
     </section>
+    
+    <section class="content-header" [hidden]="!logged || user.role!='ADMIN'">
+      <div class="container-fluid">
+        <h6 class="text-center display-4">Admin opcije</h6>
+        <br><br>
+        <div class="row">
+          <div class="col-md-3">
+          <button type="button" class="btn btn-success btn-block" (click)="reindexBooks()">
+			Reindex books
+		</button>
+          </div>
+          <div class="col-md-3">
+          <button type="button" class="btn btn-danger btn-block" (click)="deleteBooks()"> 
+			Delete books
+		</button>
+          </div>
+          <div class="col-md-3">
+          <button type="button" class="btn btn-success btn-block" (click)="reindexBetaReaders()">
+			Reindex betareaders
+		</button>
+          </div>
+          
+          <div class="col-md-3">
+          <button type="button" class="btn btn-danger btn-block" (click)="deleteBetaReaders()">
+			Delete betareaders
+		</button>
+          </div>
+         </div>
+      </div>
+      
+</section>
     </div>

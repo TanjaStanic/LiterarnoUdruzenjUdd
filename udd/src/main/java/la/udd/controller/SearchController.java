@@ -53,6 +53,12 @@ public class SearchController {
             .field("content", 50)
             .field("genre", 50);
 	
+	private HighlightBuilder highlightBuilderAdv = new HighlightBuilder()
+            .field("title", 50)
+            .field("writer", 50)
+            .field("content", 50)
+            .field("genre", 50);
+	
 	
 	@PostMapping(value="/basic/{field}", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> basicQuery(@PathVariable String field, @RequestBody String query) throws ParseException {
@@ -145,7 +151,7 @@ public class SearchController {
 		SearchRequestBuilder request = nodeClient.prepareSearch("booklibrary")
                 .setQuery(boolQuery)
                 .setSearchType(SearchType.DEFAULT)
-                .highlighter(highlightBuilder);
+                .highlighter(highlightBuilderAdv);
         System.out.println(request);
         
         SearchResponse response = request.execute().actionGet();

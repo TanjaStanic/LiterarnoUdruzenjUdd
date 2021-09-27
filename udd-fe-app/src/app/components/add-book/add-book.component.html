@@ -40,18 +40,6 @@
                         <textarea class="form-control" rows="3" placeholder="Unesite sinopsis ..." id="synopsis" name="synopsis" [(ngModel)]="book.synopsis" #synopsis = "ngModel">
                         </textarea>
                       </div>
-                      
-                  <!-- div class="form-group">
-                    <label for="exampleInputFile">PDF knjige</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="exampleInputFile" accept=".pdf" id="file" name="file" [(ngModel)]="book.file" #file = "ngModel">
-                        <label class="custom-file-label" for="exampleInputFile">Odaberi datoteku...</label>
-                      </div>
-                      
-                    </div>
-                  </div-->
-  
                 </div>
                 <!-- /.card-body -->
 
@@ -105,11 +93,11 @@
                       <td>{{b.genre}}</td>
                       <td>{{b.synopsis}}</td>
                       <td >
-                     	 <input type="file" [disabled]="b.status != 'Odobrena' || b.filename!=null "  id="fileId" accept=".pdf" placeholder="Odaberi ..." (change)="onFileSelected($event)">
+                     	 <input type="file" [disabled]="b.status != 'NA_CEKANJU'"  id="fileId" accept=".pdf" placeholder="Odaberi ..." (change)="onFileSelected($event)">
                                           
                       </td>
                       <td>
-                      <button type="button" class="btn btn-block btn-default" [disabled]="b.status != 'Odobrena' || b.filename!=null" (click)="uploadFile(b.id)" >Potvrdi                    
+                      <button type="button" class="btn btn-block btn-default" [disabled]="b.status != 'NA_CEKANJU'" (click)="uploadFile(b.id)" >Potvrdi                    
                 
                       </button>
                                              

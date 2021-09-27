@@ -25,17 +25,27 @@ export class AllBooksComponent implements OnInit {
 		  ) { }
 
   ngOnInit(): void {
+	//get all books
+	    this.getPublishedBooks();
+	
 	  this.token = this.auth.getJwtToken();
 	    console.log(this.token);
 	    if (!this.token) {
 	      this.notLogged = true;
 	    } else {
 	      this.logged = true;
-	      
+	       this.userService.getLogged(this.token).subscribe(podaci => { this.pathToList(podaci); });
 	     }
-	//get all books
-	    this.getPublishedBooks();
+	
   }
+	pathToList(data){
+		console.log("in path to list");
+		this.user = data as User;
+		console.log(this.user);
+		this.id_logged=this.user.id;
+		
+	}
+
   getPublishedBooks(){
 	  this.bookService.getPublishedBooks().subscribe(
 			  data => {
@@ -55,4 +65,40 @@ export class AllBooksComponent implements OnInit {
   downloadBook() {
 	  window.alert("Knjiga se preuzima")
   }
+  reindexBooks(){
+		this.bookService.reindexBooks().subscribe(
+			data => {
+					window.alert(data)
+					window.location.href = 'http://localhost:4200';
+					},
+			err => console.log(err)
+		);
+	}
+	reindexBetaReaders() {
+		this.bookService.reindexBetaReaders().subscribe(
+			data => {
+					window.alert(data)
+					window.location.href = 'http://localhost:4200';
+					},
+			err => console.log(err)
+		);
+	}
+	deleteBooks(){
+		this.bookService.deleteBooks().subscribe(
+			data => {
+					window.alert(data)
+					window.location.href = 'http://localhost:4200';
+					},
+			err => console.log(err)
+		);
+	}
+	deleteBetaReaders(){
+		this.bookService.deleteBetaReaders().subscribe(
+			data => {
+					window.alert(data)
+					window.location.href = 'http://localhost:4200';
+					},
+			err => console.log(err)
+		);
+	}
 }

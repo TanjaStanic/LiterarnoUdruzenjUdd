@@ -58,11 +58,11 @@ export class SendToBetaComponent implements OnInit {
 	getBooksEditor(){
 		  this.bookService.getBooksEditor(this.id_logged).subscribe(
 				  data => {
-					  console.log("My books");
-					  console.log(data);
+					//  console.log("My books");
+					 // console.log(data);
 					  this.myBooks = data;
 					  this.myBooks.sort((a:any,b:any) => a.status.localeCompare(b.status));
-						console.log(this.myBooks)
+						//console.log(this.myBooks)
 
 				  },
 				  err => {
@@ -73,7 +73,7 @@ export class SendToBetaComponent implements OnInit {
 
 	activateBook(id_book) {
 		console.log("in activate book funkcition : " + id_book);
-		this.bookService.activateBook(id_book).subscribe(
+		this.bookService.acceptBook(id_book).subscribe(
 				data => {
 					console.log("activated");
 					window.alert("Knjiga je odobrena");
@@ -108,6 +108,9 @@ export class SendToBetaComponent implements OnInit {
 				data => {
 					console.log(data)
 					this.betaReaders = data;
+					if (this.betaReaders=== undefined || this.betaReaders.length == 0){
+						window.alert("Nijedan beta citaoc ne zadovoljava uslov pretrage!")
+					}
 				},
 				err => {
 					console.log(err)
